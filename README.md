@@ -14,30 +14,31 @@ Sistem; kısa vadeli bağlam yönetimi, oturum bazlı uzun vadeli hafıza ve kul
 - Oturum kapandığında temizlenir.
 
 ### 🗂️ **2. Local LTM — Session-Scoped Long-Term Memory**
-- Her bir oturumda konuşulan **kalıcı ve değerli** bilgileri saklar.
+- Her oturumda konuşulan **kalıcı ve değerli** bilgileri saklar.
 - Farklı konular için farklı oturum hafızaları oluşturur.
-- Aynı oturum tekrar açıldığında, konuşmanın detayları geri çağrılır.
+- Aynı oturum tekrar açıldığında konuşma detayları geri çağrılır.
 
 ### 🌍 **3. Global LTM — User-Scoped Long-Term Memory**
-- Kullanıcıya ait genellenebilir gerçekler, tercihler, proje bilgileri vb. uzun vadeli hafızayı tutar.
-- Tüm oturumlar arasında ortak bilgi kaynağı görevi görür.
-- Kullanıcı kişiselleştirmesinin temelidir.
+- Kullanıcıya ait gerçekler, tercihler, proje bilgileri vb. uzun vadeli hafızayı tutar.
+- Tüm oturumlar arasında ortak bilgi kaynağıdır.
 
 ### 🔍 **Akıllı Hafıza Retrieval**
 - STM → Local LTM → Global LTM öncelik sırası
 - Embedding tabanlı semantic search
-- Similarity thresholding
-- MMR (Maximal Marginal Relevance) reranking
-- Hafıza distillation (özetleme) sistemi
+- Similarity threshold
+- MMR reranking
+- Hafıza distillation (özetleme)
 
 ### ✨ **LLM-Destekli Memory Extraction**
-- Regex veya anahtar kelime değil — her mesajı bir LLM analiz eder.
-- Çıkarımlar tamamen modeli yönlendiren “memory_policy” yapısına göre yapılır.
-- Verimli, güvenli ve genişletilebilir.
+- Her mesaj sonrası LLM tarafından memory extraction yapılır.
+- memory_policy kurallarına göre 0–5 memory çıkarılır.
+- Doğru veriler Local & Global LTM'e otomatik yazılır.
 
 ### 🧩 **Frontend**
-- React + TypeScript ile geliştirildi.
-- Oturum listesi, mesajlaşma ekranı ve memory kaynak görüntüleme alanı bulunur.
+- React + TypeScript UI  
+- Oturum listesi  
+- Mesajlaşma ekranı  
+- Memory kaynak gösterimi  
 
 ---
 
@@ -53,36 +54,27 @@ app/
 ├── ui-frontend/         # React + TypeScript UI
 └── scripts/             # DB init & index rebuild scriptleri
 
-```
 🧩 Mimari Diyagramlar
-
 1️⃣ Genel Hafıza Mimarisi
+
 flowchart TD
     UserMessage[User Message] --> Retriever
-    
+
     Retriever --> STM[(STM)]
-    
     Retriever --> LocalLTM[(Local LTM)]
-    
     Retriever --> GlobalLTM[(Global LTM)]
-    
+
     STM --> ContextMerge
-    
     LocalLTM --> ContextMerge
-    
     GlobalLTM --> ContextMerge
-    
+
     ContextMerge --> LLM[LLM Generate Reply]
-    
     LLM --> Reply[Assistant Reply]
-    
+
     Reply --> MemoryPolicy
-    
     MemoryPolicy --> LocalLTM
-    
     MemoryPolicy --> GlobalLTM
-```
-```
+
 2️⃣ Memory Writeback Akışı
 
 sequenceDiagram
@@ -94,7 +86,7 @@ sequenceDiagram
 
     U->>A: Mesaj gönderir
     A->>MP: Message + Reply → Memory analiz isteği
-    MP->>MP: LLM-based extraction (0–5 memory)
+    MP->>MP: Extraction (0–5 memory)
     alt Local memories
         MP->>L: write_local_memory()
     end
@@ -102,127 +94,130 @@ sequenceDiagram
         MP->>G: write_global_memory()
     end
 
-```
-
-```
 3️⃣ Retriever Veri Akışı
+
 flowchart LR
-    Query[User Query] --> STMQuery[STM Query]
-    
+    Query[User Query] --> STMQuery[STM Search]
     Query --> LocalQuery[Local LTM Search]
-    
     Query --> GlobalQuery[Global LTM Search]
-    
+
     STMQuery --> Merge
-    
     LocalQuery --> Merge
-    
     GlobalQuery --> Merge
-    
-    Merge --> Rerank
-    
-    Rerank --> Distill
-    
+
+    Merge --> Rerank[MMR Rerank]
+    Rerank --> Distill[Distilled Context]
     Distill --> FinalPrompt[Final Prompt to LLM]
 
-```
-
-```
-
 🔬 Örnek Hafıza Senaryosu
-Aşağıdaki örnek, sistemin STM, Local LTM ve Global LTM katmanlarının birlikte nasıl çalıştığını gösterir.
 
-```
-```
-🎯 Kullanıcı: Proje Bilgisi → Global Hafıza
+Aşağıdaki örnek STM, Local LTM ve Global LTM katmanlarının nasıl birlikte çalıştığını göstermektedir.
 
-Mesaj
+🎯 Global Memory — Proje Bilgisi
+
+User:
 Aslında bir süredir şunu planlıyorum: Market alışverişi için kişisel öneriler sunan
 bir akıllı asistan geliştirmek istiyorum. İsmi de "SmartCart AI" olsun.
 Bu uzun vadeli bir proje fikridir.
 
-Assistant
-→ Bu bilgi global LTM’e kaydedilir.
-→ Artık tüm oturumlarda şu soruya cevap verebilir:
+Assistant → Global LTM’e kaydedilir.
+
+Artık şu soruya her oturumda yanıt verebilir:
+
 Benim üzerinde çalıştığım proje neydi?
 
 Cevap:
+
 SmartCart AI projesi üzerinde çalışıyorsunuz.
 
-📁 Oturum-Bazlı Hafıza — Local LTM
-Oturumda şu mesaj geçti:
+📁 Local Memory — Oturum Bazlı Hatırlama
+
+User:
+
 Bu session’da neyi kararlaştırmıştık?
-Model bu oturumda konuşulanları Local LTM’den geri çağırır:
-Bu oturumda SmartCart AI ürün öneri modülü için TF-IDF + embedding hibrit arama
+
+Assistant (Local LTM’den çağırır):
+
+SmartCart AI ürün öneri modülü için TF-IDF + embedding hibrit arama
 kullanacağımızı kararlaştırmıştık.
 
-🔁 STM — Kısa Vadeli Hafıza (Context Window)
-Aynı oturum içinde yakın zamanda şu diyalog geçerse:
-User: SmartCart AI içinde ürün öneri modülünü nasıl tasarlıyorduk?
+🔁 STM — Yakın Bağlam Hatırlama
 
-Assistant: …
-Bir sonraki soruya:
-Bu session’da neyi kararlaştırmıştık?
-Assistant, STM → Local LTM → Global LTM sırası ile cevaplar.
-```
-```
-🧪 Gerçek Test Çıktıları (Senin Yaptığın Testlerden)
+Aynı oturum içindeki son mesajlar STM ile tutulur.
 
-Aşağıdaki örnekler sisteminin çalışma doğruluğunu göstermektedir.
+🧪 Gerçek Test Çıktıları (Kullanıcı Testlerinden)
+✔️ Global Memory — Kişisel Bilgiler
 
-✔️ Global Memory Testi — Kişisel Bilgiler
-User: Benim adım neydi?
-Assistant: Adınız Emirhan Bey.
-User: Ben hangi şehirde yaşıyorum?
-Assistant: İstanbul'da yaşıyorsunuz.
-User: Sabahları ne içiyordum?
-Assistant: Sabahları genellikle latte içiyordunuz.
+User:
+
+Benim adım neydi?
+
+
+Assistant:
+
+Adınız Emirhan Bey.
+
+
+User:
+
+Ben hangi şehirde yaşıyorum?
+
+
+Assistant:
+
+İstanbul'da yaşıyorsunuz.
+
+
+User:
+
+Sabahları ne içiyordum?
+
+
+Assistant:
+
+Sabahları genellikle latte içiyordunuz.
 
 ✔️ Global Memory — Proje Bilgisi
-User: Benim üzerinde çalıştığım proje neydi?
-Assistant: SmartCart AI adında bir proje üzerinde çalışıyorsunuz.
 
-✔️ Local Memory — Oturum Bazlı Karar Hatırlama
-User: Bu session’da neyi kararlaştırmıştık?
-Assistant: 
-Bu oturumda SmartCart AI ürün öneri modülü için TF-IDF + embedding hibrit yaklaşımı
-kullanacağımızı kesinleştirdik.
-```
-```
-Bu oturumda SmartCart AI ürün öneri modülü için TF-IDF + embedding hibrit yaklaşımı
+User:
+
+Benim üzerinde çalıştığım proje neydi?
+
+
+Assistant:
+
+SmartCart AI adında bir proje üzerinde çalışıyorsunuz.
+
+✔️ Local Memory — Session-Specific Kararlar
+
+User:
+
+Bu session’da neyi kararlaştırmıştık?
+
+
+Assistant:
+
+SmartCart AI ürün öneri modülü için TF-IDF + embedding hibrit yaklaşımını
 kullanacağımızı kesinleştirdik.
 
-```
-```
 🛠 Kurulum
-
 🔧 Backend (FastAPI)
-
 pip install -r requirements.txt
 uvicorn app.main:app --reload
-```
-```
-🎨 Frontend (React + TypeScript)
 
+🎨 Frontend (React + TypeScript)
 cd app/ui-frontend
 npm install
 npm run dev
-```
-```
-📌 Çevresel Değişkenler (.env)
 
+📌 Çevresel Değişkenler (.env)
 APP_ENV=development
 API_KEY=buraya_api_key
 EMBED_MODEL=fallback
 LLM_MODEL=fallback
-```
-```
+
 📝 Lisans
-
 MIT License
-```
-```
-⭐ Katkı
 
+⭐ Katkı
 Pull request gönderebilir, issue açabilir, geliştirmeye katkıda bulunabilirsiniz.
-```
