@@ -54,6 +54,7 @@ app/
 ├── ui-frontend/         # React + TypeScript UI
 └── scripts/             # DB init & index rebuild scriptleri
 
+```
 🧩 Mimari Diyagramlar
 1️⃣ Genel Hafıza Mimarisi
 
