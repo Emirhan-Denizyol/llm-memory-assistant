@@ -197,33 +197,33 @@ Assistant:
 
 SmartCart AI ürün öneri modülü için TF-IDF + embedding hibrit yaklaşımını
 kullanacağımızı kesinleştirdik.
-```
-```
+---
+---
 Kurulum
 Backend (FastAPI)
 pip install -r requirements.txt
 uvicorn app.main:app --reload
-```
+---
 Frontend (React + TypeScript)
 
-```
+---
 cd app/ui-frontend
 npm install
 npm run dev
-```
+---
 Çevresel Değişkenler (.env)
 
-```
+---
 APP_ENV=development
 API_KEY=buraya_api_key
 EMBED_MODEL=fallback
 LLM_MODEL=fallback
-```
+---
 Lisans
 
-```
+---
 MIT License
-```
+---
 
 Katkı
 Pull request gönderebilir, issue açabilir, geliştirmeye katkıda bulunabilirsiniz.
