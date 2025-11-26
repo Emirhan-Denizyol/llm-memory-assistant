@@ -213,14 +213,17 @@ cd app/ui-frontend
 npm install
 npm run dev
 ```
+```
 📌 Çevresel Değişkenler (.env)
 APP_ENV=development
 API_KEY=buraya_api_key
 EMBED_MODEL=fallback
 LLM_MODEL=fallback
 ```
+```
 📝 Lisans
 MIT License
+```
 ```
 ⭐ Katkı
 Pull request gönderebilir, issue açabilir, geliştirmeye katkıda bulunabilirsiniz.
