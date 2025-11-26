@@ -1,0 +1,65 @@
+# --- FastAPI ve server ---
+fastapi==0.115.0
+uvicorn[standard]==0.30.1
+python-multipart==0.0.9
+
+# --- Rate limiting ---
+slowapi==0.1.9
+
+# --- Pydantic / config ---
+pydantic==2.9.2
+pydantic-settings==2.3.4
+python-dotenv==1.0.1
+
+# --- HTTP istekleri ---
+httpx==0.27.2
+# requests==2.32.3  # gerçekten gerekirse ekle
+
+# --- Embedding / similarity ---
+numpy==1.26.4
+
+# --- DB / repository ---
+SQLAlchemy==2.0.0
+alembic==1.13.0
+sqlite-utils==3.37
+# asyncpg==0.29.0  # PostgreSQL kullanacaksan
+
+# --- Auth / güvenlik ---
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+
+# --- Observability / metrics ---
+prometheus-client==0.20.0
+
+# --- Gemini / Generative AI ---
+google-generativeai==0.8.0
+
+# --- Loglama / retry (opsiyonel ama önerilir) ---
+loguru==0.7.2
+tenacity==8.2.0
+
+# --- UI ---
+streamlit==1.38.0
+# gradio==4.44.0
+
+# --- Geliştirici araçları ---
+black==24.8.0
+ruff==0.6.2
+mypy==1.11.1
+pre-commit==3.7.1
+pytest==8.3.3
+
+# --- Docker / production server (isteğe bağlı) ---
+gunicorn==22.0.0
+
+# --- LangChain çekirdek ---
+langchain>=0.2.0
+langchain-community>=0.2.0
+
+# Gemini / Google Gen AI için (LLM + Embeddings)
+langchain-google-genai>=0.1.0
+
+# Vektör veri tabanı (tercihe göre birini seç)
+faiss-cpu>=1.8.0
+# veya
+# chromadb>=0.5.0

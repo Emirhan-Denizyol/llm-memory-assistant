@@ -1,0 +1,22 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Env
+.env
+
+# SQLite data
+data/memory.db
+data/memory.db-shm
+data/memory.db-wal
+
+# Node / frontend
+ui-frontend/node_modules/
+ui-frontend/dist/
+ui-frontend/.vite/
+
+# OS / IDE
+.DS_Store
+.vscode/
+.idea/
