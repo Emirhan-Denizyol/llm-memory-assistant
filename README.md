@@ -84,6 +84,7 @@ flowchart TD
 ```
 ```
 2️⃣ Memory Writeback Akışı
+
 sequenceDiagram
     participant U as User
     participant A as Assistant
@@ -107,15 +108,21 @@ sequenceDiagram
 3️⃣ Retriever Veri Akışı
 flowchart LR
     Query[User Query] --> STMQuery[STM Query]
+    
     Query --> LocalQuery[Local LTM Search]
+    
     Query --> GlobalQuery[Global LTM Search]
     
     STMQuery --> Merge
+    
     LocalQuery --> Merge
+    
     GlobalQuery --> Merge
     
     Merge --> Rerank
+    
     Rerank --> Distill
+    
     Distill --> FinalPrompt[Final Prompt to LLM]
 
 ```
@@ -123,30 +130,37 @@ flowchart LR
 ```
 
 🔬 Örnek Hafıza Senaryosu
+
 Aşağıdaki örnek, sistemin STM, Local LTM ve Global LTM katmanlarının birlikte nasıl çalıştığını gösterir.
 
 ```
 ```
 🎯 Kullanıcı: Proje Bilgisi → Global Hafıza
+
 Mesaj
 Aslında bir süredir şunu planlıyorum: Market alışverişi için kişisel öneriler sunan
 bir akıllı asistan geliştirmek istiyorum. İsmi de "SmartCart AI" olsun.
 Bu uzun vadeli bir proje fikridir.
+
 Assistant
 → Bu bilgi global LTM’e kaydedilir.
 → Artık tüm oturumlarda şu soruya cevap verebilir:
 Benim üzerinde çalıştığım proje neydi?
+
 Cevap:
 SmartCart AI projesi üzerinde çalışıyorsunuz.
+
 📁 Oturum-Bazlı Hafıza — Local LTM
 Oturumda şu mesaj geçti:
 Bu session’da neyi kararlaştırmıştık?
 Model bu oturumda konuşulanları Local LTM’den geri çağırır:
 Bu oturumda SmartCart AI ürün öneri modülü için TF-IDF + embedding hibrit arama
 kullanacağımızı kararlaştırmıştık.
+
 🔁 STM — Kısa Vadeli Hafıza (Context Window)
 Aynı oturum içinde yakın zamanda şu diyalog geçerse:
 User: SmartCart AI içinde ürün öneri modülünü nasıl tasarlıyorduk?
+
 Assistant: …
 Bir sonraki soruya:
 Bu session’da neyi kararlaştırmıştık?
@@ -154,7 +168,9 @@ Assistant, STM → Local LTM → Global LTM sırası ile cevaplar.
 ```
 ```
 🧪 Gerçek Test Çıktıları (Senin Yaptığın Testlerden)
+
 Aşağıdaki örnekler sisteminin çalışma doğruluğunu göstermektedir.
+
 ✔️ Global Memory Testi — Kişisel Bilgiler
 User: Benim adım neydi?
 Assistant: Adınız Emirhan Bey.
@@ -162,9 +178,11 @@ User: Ben hangi şehirde yaşıyorum?
 Assistant: İstanbul'da yaşıyorsunuz.
 User: Sabahları ne içiyordum?
 Assistant: Sabahları genellikle latte içiyordunuz.
+
 ✔️ Global Memory — Proje Bilgisi
 User: Benim üzerinde çalıştığım proje neydi?
 Assistant: SmartCart AI adında bir proje üzerinde çalışıyorsunuz.
+
 ✔️ Local Memory — Oturum Bazlı Karar Hatırlama
 User: Bu session’da neyi kararlaştırmıştık?
 Assistant: 
@@ -174,6 +192,7 @@ kullanacağımızı kesinleştirdik.
 ```
 ```
 🛠 Kurulum
+
 🔧 Backend (FastAPI)
 pip install -r requirements.txt
 uvicorn app.main:app --reload
