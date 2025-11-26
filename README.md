@@ -59,16 +59,27 @@ app/
 1️⃣ Genel Hafıza Mimarisi
 flowchart TD
     UserMessage[User Message] --> Retriever
+    
     Retriever --> STM[(STM)]
+    
     Retriever --> LocalLTM[(Local LTM)]
+    
     Retriever --> GlobalLTM[(Global LTM)]
+    
     STM --> ContextMerge
+    
     LocalLTM --> ContextMerge
+    
     GlobalLTM --> ContextMerge
+    
     ContextMerge --> LLM[LLM Generate Reply]
+    
     LLM --> Reply[Assistant Reply]
+    
     Reply --> MemoryPolicy
+    
     MemoryPolicy --> LocalLTM
+    
     MemoryPolicy --> GlobalLTM
 ```
 ```
