@@ -115,6 +115,7 @@ flowchart LR
 
 Aşağıdaki örnek STM, Local LTM ve Global LTM katmanlarının nasıl birlikte çalıştığını göstermektedir.
 
+```
 🎯 Global Memory — Proje Bilgisi
 
 User:
@@ -132,6 +133,7 @@ Cevap:
 
 SmartCart AI projesi üzerinde çalışıyorsunuz.
 
+```
 📁 Local Memory — Oturum Bazlı Hatırlama
 
 User:
@@ -143,6 +145,7 @@ Assistant (Local LTM’den çağırır):
 SmartCart AI ürün öneri modülü için TF-IDF + embedding hibrit arama
 kullanacağımızı kararlaştırmıştık.
 
+```
 🔁 STM — Yakın Bağlam Hatırlama
 
 Aynı oturum içindeki son mesajlar STM ile tutulur.
@@ -179,6 +182,7 @@ Assistant:
 
 Sabahları genellikle latte içiyordunuz.
 
+```
 ✔️ Global Memory — Proje Bilgisi
 
 User:
@@ -190,6 +194,7 @@ Assistant:
 
 SmartCart AI adında bir proje üzerinde çalışıyorsunuz.
 
+```
 ✔️ Local Memory — Session-Specific Kararlar
 
 User:
