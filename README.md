@@ -70,7 +70,7 @@ flowchart TD
     Reply --> MemoryPolicy
     MemoryPolicy --> LocalLTM
     MemoryPolicy --> GlobalLTM
-
+```
 ```
 2️⃣ Memory Writeback Akışı
 sequenceDiagram
@@ -115,9 +115,7 @@ flowchart LR
 Aşağıdaki örnek, sistemin STM, Local LTM ve Global LTM katmanlarının birlikte nasıl çalıştığını gösterir.
 
 ```
-
 ```
-
 🎯 Kullanıcı: Proje Bilgisi → Global Hafıza
 Mesaj
 Aslında bir süredir şunu planlıyorum: Market alışverişi için kişisel öneriler sunan
@@ -142,6 +140,8 @@ Assistant: …
 Bir sonraki soruya:
 Bu session’da neyi kararlaştırmıştık?
 Assistant, STM → Local LTM → Global LTM sırası ile cevaplar.
+```
+```
 🧪 Gerçek Test Çıktıları (Senin Yaptığın Testlerden)
 Aşağıdaki örnekler sisteminin çalışma doğruluğunu göstermektedir.
 ✔️ Global Memory Testi — Kişisel Bilgiler
@@ -159,6 +159,9 @@ User: Bu session’da neyi kararlaştırmıştık?
 Assistant: 
 Bu oturumda SmartCart AI ürün öneri modülü için TF-IDF + embedding hibrit yaklaşımı
 kullanacağımızı kesinleştirdik.
+
+```
+```
 🛠 Kurulum
 🔧 Backend (FastAPI)
 pip install -r requirements.txt
@@ -178,7 +181,9 @@ MIT License
 Pull request gönderebilir, issue açabilir, geliştirmeye katkıda bulunabilirsiniz.
 
 ---
+```
 
+```
 # 📌 Artık hazırsın
 
 Bu README:
