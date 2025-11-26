@@ -187,11 +187,9 @@ User: Bu session’da neyi kararlaştırmıştık?
 Assistant: 
 Bu oturumda SmartCart AI ürün öneri modülü için TF-IDF + embedding hibrit yaklaşımı
 kullanacağımızı kesinleştirdik.
-
 ```
 ```
 🛠 Kurulum
-
 🔧 Backend (FastAPI)
 pip install -r requirements.txt
 uvicorn app.main:app --reload
