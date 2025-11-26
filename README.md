@@ -206,11 +206,11 @@ uvicorn app.main:app --reload
 ---
 Frontend (React + TypeScript)
 
----
+```
 cd app/ui-frontend
 npm install
 npm run dev
----
+```
 Çevresel Değişkenler (.env)
 
 ---
