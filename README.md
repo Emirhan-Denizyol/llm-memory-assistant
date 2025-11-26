@@ -230,4 +230,3 @@ MIT License
 ```
 ⭐ Katkı
 Pull request gönderebilir, issue açabilir, geliştirmeye katkıda bulunabilirsiniz.
-```
