@@ -110,12 +110,11 @@ flowchart LR
     Rerank --> Distill[Distilled Context]
     Distill --> FinalPrompt[Final Prompt to LLM]
 
-```
+---
 🔬 Örnek Hafıza Senaryosu
 
 Aşağıdaki örnek STM, Local LTM ve Global LTM katmanlarının nasıl birlikte çalıştığını göstermektedir.
-
-```
+---
 🎯 Global Memory — Proje Bilgisi
 
 User:
@@ -133,7 +132,6 @@ Cevap:
 
 SmartCart AI projesi üzerinde çalışıyorsunuz.
 
-```
 📁 Local Memory — Oturum Bazlı Hatırlama
 
 User:
@@ -145,7 +143,7 @@ Assistant (Local LTM’den çağırır):
 SmartCart AI ürün öneri modülü için TF-IDF + embedding hibrit arama
 kullanacağımızı kararlaştırmıştık.
 
-```
+---
 🔁 STM — Yakın Bağlam Hatırlama
 
 Aynı oturum içindeki son mesajlar STM ile tutulur.
@@ -157,50 +155,43 @@ User:
 
 Benim adım neydi?
 
-
 Assistant:
 
 Adınız Emirhan Bey.
-
 
 User:
 
 Ben hangi şehirde yaşıyorum?
 
-
 Assistant:
 
 İstanbul'da yaşıyorsunuz.
-
 
 User:
 
 Sabahları ne içiyordum?
 
-
 Assistant:
 
 Sabahları genellikle latte içiyordunuz.
 
-```
+---
 ✔️ Global Memory — Proje Bilgisi
 
 User:
 
 Benim üzerinde çalıştığım proje neydi?
 
-
 Assistant:
 
 SmartCart AI adında bir proje üzerinde çalışıyorsunuz.
 
-```
+---
 ✔️ Local Memory — Session-Specific Kararlar
 
 User:
 
 Bu session’da neyi kararlaştırmıştık?
-
 
 Assistant:
 
