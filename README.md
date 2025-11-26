@@ -130,7 +130,6 @@ flowchart LR
 ```
 
 🔬 Örnek Hafıza Senaryosu
-
 Aşağıdaki örnek, sistemin STM, Local LTM ve Global LTM katmanlarının birlikte nasıl çalıştığını gösterir.
 
 ```
