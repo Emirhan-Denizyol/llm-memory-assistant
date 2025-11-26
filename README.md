@@ -6,35 +6,35 @@ Sistem; kısa vadeli bağlam yönetimi, oturum bazlı uzun vadeli hafıza ve kul
 
 ---
 
-## 🚀 Özellikler
+## Özellikler
 
-### 🧠 **1. STM — Short-Term Memory (Kısa Vadeli Hafıza)**
+### **1. STM — Short-Term Memory (Kısa Vadeli Hafıza)**
 - Sadece mevcut oturumda (session) son N mesajı tutar.
 - Bağlam kopmadan konuşma akışının sürmesini sağlar.
 - Oturum kapandığında temizlenir.
 
-### 🗂️ **2. Local LTM — Session-Scoped Long-Term Memory**
+### **2. Local LTM — Session-Scoped Long-Term Memory**
 - Her oturumda konuşulan **kalıcı ve değerli** bilgileri saklar.
 - Farklı konular için farklı oturum hafızaları oluşturur.
 - Aynı oturum tekrar açıldığında konuşma detayları geri çağrılır.
 
-### 🌍 **3. Global LTM — User-Scoped Long-Term Memory**
+### **3. Global LTM — User-Scoped Long-Term Memory**
 - Kullanıcıya ait gerçekler, tercihler, proje bilgileri vb. uzun vadeli hafızayı tutar.
 - Tüm oturumlar arasında ortak bilgi kaynağıdır.
 
-### 🔍 **Akıllı Hafıza Retrieval**
+### **Akıllı Hafıza Retrieval**
 - STM → Local LTM → Global LTM öncelik sırası
 - Embedding tabanlı semantic search
 - Similarity threshold
 - MMR reranking
 - Hafıza distillation (özetleme)
 
-### ✨ **LLM-Destekli Memory Extraction**
+### **LLM-Destekli Memory Extraction**
 - Her mesaj sonrası LLM tarafından memory extraction yapılır.
 - memory_policy kurallarına göre 0–5 memory çıkarılır.
 - Doğru veriler Local & Global LTM'e otomatik yazılır.
 
-### 🧩 **Frontend**
+### **Frontend**
 - React + TypeScript UI  
 - Oturum listesi  
 - Mesajlaşma ekranı  
@@ -42,7 +42,7 @@ Sistem; kısa vadeli bağlam yönetimi, oturum bazlı uzun vadeli hafıza ve kul
 
 ---
 
-# 📁 Proje Mimarı ve Dizini
+# Proje Mimarı ve Dizini
 
 ```plaintext
 app/
@@ -55,7 +55,7 @@ app/
 └── scripts/             # DB init & index rebuild scriptleri
 
 ```
-🧩 Mimari Diyagramlar
+Mimari Diyagramlar
 1️⃣ Genel Hafıza Mimarisi
 
 flowchart TD
@@ -111,11 +111,11 @@ flowchart LR
     Distill --> FinalPrompt[Final Prompt to LLM]
 
 ---
-🔬 Örnek Hafıza Senaryosu
+Örnek Hafıza Senaryosu
 
 Aşağıdaki örnek STM, Local LTM ve Global LTM katmanlarının nasıl birlikte çalıştığını göstermektedir.
 ---
-🎯 Global Memory — Proje Bilgisi
+Global Memory — Proje Bilgisi
 
 User:
 Aslında bir süredir şunu planlıyorum: Market alışverişi için kişisel öneriler sunan
@@ -132,7 +132,7 @@ Cevap:
 
 SmartCart AI projesi üzerinde çalışıyorsunuz.
 
-📁 Local Memory — Oturum Bazlı Hatırlama
+Local Memory — Oturum Bazlı Hatırlama
 
 User:
 
@@ -199,19 +199,19 @@ SmartCart AI ürün öneri modülü için TF-IDF + embedding hibrit yaklaşımı
 kullanacağımızı kesinleştirdik.
 ```
 ```
-🛠 Kurulum
-🔧 Backend (FastAPI)
+Kurulum
+Backend (FastAPI)
 pip install -r requirements.txt
 uvicorn app.main:app --reload
 ```
-🎨 Frontend (React + TypeScript)
+Frontend (React + TypeScript)
 
 ```
 cd app/ui-frontend
 npm install
 npm run dev
 ```
-📌 Çevresel Değişkenler (.env)
+Çevresel Değişkenler (.env)
 
 ```
 APP_ENV=development
@@ -219,10 +219,11 @@ API_KEY=buraya_api_key
 EMBED_MODEL=fallback
 LLM_MODEL=fallback
 ```
-📝 Lisans
+Lisans
 
 ```
 MIT License
 ```
-⭐ Katkı
+
+Katkı
 Pull request gönderebilir, issue açabilir, geliştirmeye katkıda bulunabilirsiniz.
